@@ -1,0 +1,8 @@
+[
+    {%- for item in page.entries %}
+        {% include post.html post=item %}
+        {% if forloop.last != true %}
+            ,
+        {% endif %}
+    {% endfor -%}
+]

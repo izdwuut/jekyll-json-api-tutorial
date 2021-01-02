@@ -1,0 +1,9 @@
+{
+    "title": {{ include.post.title | jsonify }},
+    "categories": {{ include.post.categories | jsonify }},
+    "tags": {{ include.post.tags | jsonify }},
+    "content": {{ include.post.content | markdownify | jsonify  }},
+    "collection": {{ include.post.collection | jsonify }},
+    "date": {{ include.post.date | jsonify }},
+    "custom-property": {{ include.post.custom-property | jsonify }}
+}
