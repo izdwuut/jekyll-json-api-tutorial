@@ -49,30 +49,4 @@ github_username:  jekyll
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-
-defaults:
-  - scope:
-      type: categories
-    values:
-      layout: items_index
-      permalink: categories/:category/
-  - scope:
-      type: categories_index
-    values:
-      layout: categories_index
-      permalink: categories/
-  -
-    scope:
-      type: posts
-    values:
-      layout: post
-  -
-    scope:
-      type: posts_index
-    values:
-      layout: items_index
-  
-  
-
-
   
