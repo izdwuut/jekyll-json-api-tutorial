@@ -44,7 +44,6 @@ module Jekyll
       data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(relative_path, type, key)
       end
-      puts JSON.generate(data.entries)
     end
 
     def url_placeholders
@@ -62,26 +61,24 @@ module Jekyll
     priority :normal
 
     def generate(site)
-      categories = {}
-      posts = []
+      posts = site.posts.docs.map{ |post| post.data.clone }
 
       site.categories.each_key do |category|
-        categories[category] = []
-        site.categories[category].each_entry do |post|
-          if post.data['draft']
-            continue
-          end
-          inserted_post = post.data.clone
-          categories[category].append(inserted_post)
-          posts.append(inserted_post)
-        end
+        categories = site.categories[category].map{ |post| post.data.clone }
+
+        site.pages << ListingPage.new(site, 
+                                      category, 
+                                      categories, 
+                                      :categories)
       end
-      
-      site.categories.each_key do |category|
-        site.pages << ListingPage.new(site, category, categories[category], :categories)
-      end
-      site.pages << ListingPage.new(site, "", posts, :posts_index)
-      site.pages << ListingPage.new(site, "", categories.keys, :categories_index)
+      site.pages << ListingPage.new(site, 
+                                    "", 
+                                    posts, 
+                                    :posts_index)
+      site.pages << ListingPage.new(site, 
+                                    "", 
+                                    site.categories.keys, 
+                                    :categories_index)
     end
   end
 end
