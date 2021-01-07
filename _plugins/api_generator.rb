@@ -61,7 +61,7 @@ module Jekyll
     priority :normal
 
     def generate(site)
-      posts = site.posts.docs.map{ |post| post.data.clone }
+      posts = site.posts.docs.map{ |post| post.data.clone if !post.data['draft'] }
 
       site.categories.each_key do |category|
         categories = site.categories[category].map{ |post| post.data.clone }
